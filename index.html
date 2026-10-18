@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#142d4e">
+  <meta name="description" content="Explore 2021 contact-center demand, service delivery, team handle time and customer experience. An interactive web demo with the original Tableau workbook available to download.">
+  <title>Contact Center Intelligence — Interactive Demo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to dashboard</a>
+<aside class="sidebar">
+  <a class="brand" href="#overview" aria-label="Contact Center Intelligence overview">
+    <svg viewBox="0 0 44 34" aria-hidden="true"><rect x="0" y="22" width="7" height="12" rx="2"/><rect x="12" y="14" width="7" height="20" rx="2"/><rect x="24" y="7" width="7" height="27" rx="2"/><rect x="36" width="7" height="34" rx="2"/></svg>
+    <strong>CONTACT<br>CENTER</strong><span>INTELLIGENCE / 2021</span>
+  </a>
+  <p class="eyebrow side-label">EXPLORE THE REPORT</p>
+  <nav class="navigation" aria-label="Dashboard pages">
+    <a href="#overview" data-page="overview" aria-current="page"><span>01</span>Overview<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4"/></svg></a>
+    <a href="#operations" data-page="operations"><span>02</span>Operations<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4"/></svg></a>
+    <a href="#teams" data-page="teams"><span>03</span>Team Performance<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 4 4 4-4 4"/></svg></a>
+  </nav>
+  <form id="filters" class="filters" aria-label="Report selections">
+    <div class="filter-heading"><p class="eyebrow">YOUR SELECTION</p><button type="button" id="reset" title="Reset all selections">Reset</button></div>
+    <label for="month">Month</label><select id="month" name="month"><option value="0">All months</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>
+    <label for="language">Language</label><select id="language" name="language"><option value="all">All languages</option><option value="AR">AR</option><option value="ENG">ENG</option></select>
+    <label for="skill">Skill</label><select id="skill" name="skill"><option value="all">All skills</option><option value="Complain">Complain</option><option value="Inquiry">Inquiry</option></select>
+    <p class="filter-note">Month applies to both sources. Language and Skill apply to call measures; comparisons retain both sides.</p>
+  </form>
+  <div class="source-snapshot"><span class="status-dot"></span><p class="eyebrow">SOURCE SNAPSHOT</p><strong>365 <small>Calendar dates</small></strong><p>1,028 aggregate call records<br>551 survey responses</p></div>
+  <div class="sidebar-bottom"><a href="https://hwq12331.github.io/">← Back to portfolio</a><span>ENGLISH EDITION · WEB DEMO</span></div>
+</aside>
+<main id="main" tabindex="-1">
+  <header class="report-header">
+    <div><p class="eyebrow">CONTACT CENTER INTELLIGENCE <span class="report-tag">INTERACTIVE DEMO</span></p><h1 id="page-title">Service at a glance</h1><p class="subtitle" id="page-subtitle">Demand, service delivery and the customer experience.</p></div>
+    <div class="header-actions"><button id="methods-open" class="button secondary" type="button">How it’s calculated</button><a class="button primary" href="downloads/Call_Center_Tableau.twbx" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m-4-4 4 4 4-4M4 13v4h12v-4"/></svg>Tableau workbook</a></div>
+  </header>
+  <div class="context-bar"><p id="selection-context">2021 · All months · All languages · All skills</p><div><span id="coverage"></span><button id="share" type="button">Copy report link <span aria-hidden="true">↗</span></button></div></div>
+  <section class="kpis" id="kpis" aria-label="Key performance indicators" aria-live="polite"></section>
+  <section id="overview" class="report-page" aria-labelledby="page-title">
+    <div class="chart-grid">
+      <article class="chart-card"><div class="card-heading"><div><h2>Demand, normalized</h2><p>Average offered calls per Calendar day · by month</p></div><span class="unit">CALLS / DAY</span></div><div id="chart-demand" class="chart"></div><p class="insight" id="insight-demand"></p></article>
+      <article class="chart-card"><div class="card-heading"><div><h2>Answered vs on time</h2><p>PCA and SLA · shared Offered denominator</p></div><div class="legend"><span class="blue">PCA</span><span class="teal">SLA</span></div></div><div id="chart-service" class="chart"></div><p class="insight" id="insight-service"></p></article>
+      <article class="chart-card"><div class="card-heading"><div><h2>Quarterly team comparison</h2><p>Weighted AHT · both languages retained</p></div><div class="legend"><span class="teal">AR</span><span class="blue">ENG</span></div></div><div id="chart-quarter" class="chart"></div><p class="insight" id="insight-quarter"></p></article>
+      <article class="chart-card"><div class="card-heading"><div><h2>Resolution meets satisfaction</h2><p>FCR vs CSAT · monthly survey pairs · date only</p></div><span class="unit">SURVEYS</span></div><div id="chart-scatter" class="chart"></div><p class="insight" id="insight-scatter"></p></article>
+    </div>
+  </section>
+  <section id="operations" class="report-page" aria-labelledby="page-title" hidden>
+    <div class="chart-grid">
+      <article class="chart-card"><div class="card-heading"><div><h2>Daily demand</h2><p>Offered calls by date · selected-period average</p></div><span class="unit">OFFERED CALLS</span></div><div id="chart-daily" class="chart"></div><p class="insight" id="insight-daily"></p></article>
+      <article class="chart-card"><div class="card-heading"><div><h2>The weekday rhythm</h2><p>Daily averages · Sunday-first Calendar ordering</p></div><span class="unit">CALLS / DAY</span></div><div id="chart-weekday" class="chart"></div><p class="insight" id="insight-weekday"></p></article>
+      <article class="chart-card"><div class="card-heading"><div><h2>Where demand lands</h2><p>Monthly offered calls · both skills retained</p></div><div class="legend"><span class="blue">Complain</span><span class="teal">Inquiry</span></div></div><div id="chart-skills" class="chart"></div><p class="insight" id="insight-skills"></p></article>
+      <article class="chart-card"><div class="card-heading"><div><h2>Answering within each skill</h2><p>Answered / offered · both skills retained</p></div><span class="unit">PCA / %</span></div><div id="chart-answer" class="chart"></div><p class="insight" id="insight-answer"></p></article>
+    </div>
+  </section>
+  <section id="teams" class="report-page" aria-labelledby="page-title" hidden>
+    <div class="chart-grid">
+      <article class="chart-card"><div class="card-heading"><div><h2>Daily AHT distribution</h2><p>One weighted daily AHT per team · 1.5 × IQR whiskers</p></div><div class="legend"><span class="teal">AR</span><span class="blue">ENG</span></div></div><div id="chart-box" class="chart"></div><p class="insight" id="insight-box"></p></article>
+      <article class="chart-card"><div class="card-heading"><div><h2>Handle time over the year</h2><p>Monthly volume-weighted AHT · minutes</p></div><span class="unit amber-text">AHT / MIN</span></div><div id="chart-aht" class="chart"></div><p class="insight" id="insight-aht"></p></article>
+    </div>
+    <article class="summary-card"><div class="card-heading"><div><h2>Daily distribution · numerical summary</h2><p>Valid daily aggregates · quartiles use linear interpolation · both languages retained</p></div></div><div class="table-scroll"><table><thead><tr><th scope="col">Language</th><th scope="col">Valid days</th><th scope="col">Min</th><th scope="col">Q1</th><th scope="col">Median</th><th scope="col">Q3</th><th scope="col">Max</th></tr></thead><tbody id="distribution-table"></tbody></table></div></article>
+    <div class="components" id="components"></div>
+  </section>
+  <section class="audit-section"><details id="monthly-details"><summary>Explore the numbers <span>Monthly summary & CSV export</span></summary><div class="audit-toolbar"><p>Calls follow all three selections. Survey results follow Month only.</p><button class="button secondary" id="export" type="button">Download monthly CSV</button></div><div class="table-scroll"><table><thead><tr><th>Month</th><th>Days</th><th>Offered</th><th>Answered</th><th>Calls/day</th><th>AHT min</th><th>PCA</th><th>SLA</th><th>Surveys</th><th>CSAT / 5</th><th>FCR</th></tr></thead><tbody id="monthly-table"></tbody></table></div></details></section>
+  <footer><p><strong>MODEL</strong> One shared Calendar connects Calls and CSAT; the facts retain their separate grains.</p><p><strong>METHOD</strong> Seconds assumed · weighted AHT · SLA uses Offered · no supplied performance targets.</p><div><span>Browser-based analytical demo. Download the original workbook for Tableau.</span><a href="https://github.com/hwq12331/Call-Center-Analytics-Demo">View source ↗</a></div></footer>
+</main>
+<dialog id="methods"><div class="modal-heading"><p class="eyebrow">THE MEASURES BEHIND THE VIEW</p><button id="methods-close" type="button" aria-label="Close calculation definitions">×</button></div><h2>Definitions you can audit.</h2><p>All views use the supplied 2021 data. Calls are aggregate records; surveys are individual responses.</p><dl><dt>Answered Calls</dt><dd>Within service level + answers after service level.</dd><dt>Total handle time</dt><dd>Talk + Hold + After-Call Work. Source units are not specified; seconds are assumed.</dd><dt>AHT, minutes</dt><dd>SUM(handle time) / SUM(answered calls) / 60.</dd><dt>PCA</dt><dd>SUM(answered) / SUM(offered).</dd><dt>SLA</dt><dd>SUM(within service level) / SUM(offered). No threshold or target was supplied.</dd><dt>Average calls/day</dt><dd>Offered calls / selected Calendar dates, including zero-volume dates for a selected segment.</dd><dt>CSAT</dt><dd>Mean rating: Very Dissatisfied=1, Dissatisfied=2, Neutral=3, Satisfied=4, Very Satisfied=5.</dd><dt>FCR</dt><dd>Mean of normalized Yes=1 / No=0 responses. Unrecognized responses are excluded rather than treated as No.</dd><dt>Monthly association</dt><dd>Pearson correlation of equally weighted monthly FCR/CSAT means. Samples and association do not establish causation.</dd></dl><p class="modal-note">Language comparisons retain both teams and follow Month + Skill. Skill comparisons retain both skills and follow Month + Language. Surveys have no Language, Skill, or Call ID and use date only. Boxplot observations are daily weighted averages, not individual-call durations.</p><a class="button primary" href="downloads/Call_Center_Tableau.twbx" download>Download the Tableau workbook</a></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<noscript><p class="noscript">This interactive demo needs JavaScript. You can still <a href="downloads/Call_Center_Tableau.twbx">download the Tableau workbook</a>.</p></noscript>
+</body>
+</html>

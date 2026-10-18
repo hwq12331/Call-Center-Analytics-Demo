@@ -1,0 +1,9 @@
+{
+  "workbook": "Call_Center_Tableau.twbx",
+  "sha256": "a8a997a9267ba098ada248b172bd5330f032eccf4a9e3d4e83764214797ac614",
+  "calendar_dates": 365,
+  "call_records": 1028,
+  "surveys": 551,
+  "period": "2021-01-01 to 2021-12-31",
+  "time_units": "Seconds assumed; input source does not specify units."
+}
